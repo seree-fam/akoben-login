@@ -32,19 +32,20 @@ const SemaphoreButton: React.FC = () => {
     const identity = new Identity(signature);
 
     const semaphoreSubgraph = new SemaphoreSubgraph("sepolia");
-    const { members } = await semaphoreSubgraph.getGroup("42", { members: true });
-    const group = new Group(members);
+    const groupData = await semaphoreSubgraph.getGroup("42", { members: true });
+    const members = groupData?.members;
 
-    if (members.includes(identity.commitment.toString())) {
-      setIsAuthenticated(true);
+    if (members && members.includes(identity.commitment.toString())) {
+        setIsAuthenticated(true);
     } else {
-      const code = prompt('Enter your invite code:');
-      if (code) {
+        const code = prompt('Enter your invite code:');
+        if (code) {
+        const group = new Group(members || []);
         group.addMember(identity.commitment);
         setIsAuthenticated(true);
-      }
+        }
     }
-  };
+    };
 
   return (
     <div>
