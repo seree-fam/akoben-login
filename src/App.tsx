@@ -4,7 +4,9 @@ import { Web3Provider } from '@ethersproject/providers';
 import SemaphoreButton from './SemaphoreButton';
 
 function getLibrary(provider: any): Web3Provider {
-  return new Web3Provider(provider);
+  const library = new Web3Provider(provider)
+  library.pollingInterval = 12000
+  return library
 }
 
 const App: React.FC = () => {

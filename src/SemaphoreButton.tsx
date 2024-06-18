@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { ethers } from "ethers";
 import { SemaphoreSubgraph } from "@semaphore-protocol/data";
 import { Identity } from "@semaphore-protocol/identity";
 import { Group } from "@semaphore-protocol/group";
@@ -15,29 +14,17 @@ const SemaphoreButton: React.FC = () => {
   const [inviteCode, setInviteCode] = useState("");
   const [group, setGroup] = useState<Group | null>(null);
 
-  useEffect(() => {
-    if (active && library) {
-      handleSignMessage();
-    }
-  }, [active, library]);
-
   const handleConnectWallet = async () => {
     try {
       console.log("Connecting wallet...");
       await activate(injected);
       console.log("Wallet connected");
-    } catch (error) {
-      console.error("Error connecting wallet:", error);
-    }
-  };
 
-  const handleSignMessage = async () => {
-    if (!library) {
-      console.error("Library is not available");
-      return;
-    }
+      if (!library) {
+        console.error("Library is not available");
+        return;
+      }
 
-    try {
       const signer = library.getSigner();
       const message = "welcome to freedom";
       console.log("Signing message...");
@@ -65,7 +52,7 @@ const SemaphoreButton: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error("Error during sign message or group check:", error);
+      console.error("Error connecting wallet or during sign message or group check:", error);
     }
   };
 
