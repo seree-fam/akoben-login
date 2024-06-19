@@ -5,6 +5,7 @@ import { Identity } from "@semaphore-protocol/identity";
 import { Group } from "@semaphore-protocol/group";
 
 // const ALCHEMY_API_KEY = process.env.REACT_APP_ALCHEMY_API_KEY;
+const ALCHEMY_API_KEY = "lyWjJAFsJ3u1e1h91qZyz683KLct-Rr6";
 
 const SemaphoreButton: React.FC = () => {
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
