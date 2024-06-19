@@ -1,0 +1,1 @@
+// semaphore verifier deployed to: 0x58AD7a4389E0F5d814815E5D5A3Ab903dAE9284a
